@@ -1,0 +1,12 @@
+<!--pages/bug/bug.wxml-->
+<view class="container">
+    <view class="text-box">
+        <view class="label">问题详情:</view>
+        <textarea name="bug-info" id="bug-info" cols="30" rows="10" class="ssh" placeholder="请输入对问题的详细描述" bindinput="saveInfo"></textarea>
+        <view class="label">抽卡链接:</view>
+        <input type="text" id="authkey" class="ssh" placeholder="请提供您的抽卡链接" bindinput="saveAuthkey" maxlength="4096" />
+    </view>
+    <view class="btn-box">
+        <button id="submit" bindtap="onSubmit">提 交</button>
+    </view>
+</view>

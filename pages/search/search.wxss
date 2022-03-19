@@ -1,0 +1,63 @@
+/* pages/search/search.wxss */
+.container {
+    padding: 0px;
+}
+
+.inputbar {
+    margin: 0px auto;
+    margin-top: 300rpx;
+    margin-bottom: 100rpx;
+
+    width: 600rpx;
+}
+
+#url {
+    border: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: #4e6ef2;
+
+    font-size: 16px;
+}
+
+.url-placeholder {
+    text-align: center;
+}
+
+.tipbar {
+    margin: 0px auto;
+    width: fit-content;
+    font-size: 12px;
+    color: #bbbbbb;
+}
+
+button#getdata {
+    background-color: #4e6ef2;
+    color: white;
+    margin-bottom: 20rpx;
+}
+
+button#gethistory {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #4e6ef2;
+}
+
+.btn-hover {
+    background-color: #4e6ef2;
+    opacity: 0.8;
+}
+
+.hisbtn-hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 0.8;
+}
+
+.bug {
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    bottom: 100rpx;
+    margin: 0px auto;
+    width: fit-content;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.3);
+}

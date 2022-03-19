@@ -1,0 +1,35 @@
+/* pages/bug/bug.wxss */
+.container {
+    padding: 0px;
+    padding-top: 150rpx;
+}
+
+.text-box {
+    margin: 0px auto;
+}
+
+.ssh {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+    border-color: #4e6ef2;
+    padding: 5px 10px 5px 10px;
+    margin-top: 8px;
+    margin-bottom: 18px;
+    width: 600rpx;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.btn-box {
+    margin-top: 30px;
+}
+
+.label {
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: 900;
+}
+
+#submit {
+    background-color: #4e6ef2;
+    color: white;
+}

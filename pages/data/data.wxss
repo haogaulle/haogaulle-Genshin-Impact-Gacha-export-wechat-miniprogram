@@ -1,0 +1,71 @@
+/* pages/data/data.wxss */
+#main {
+    background-color: #607D8B;
+    padding-top: 20rpx;
+    padding-bottom: 10rpx;
+}
+
+.item {
+    width: 710rpx;
+    background-color: #455A64;
+    margin: 0px auto;
+    border-radius: 15rpx;
+    margin-bottom: 20rpx;
+    padding-bottom: 10rpx;
+}
+
+.canvas {
+    width: 710rpx;
+    height: 710rpx;
+}
+
+.info-box {
+    font-size: 14px;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.title {
+    color: rgba(255, 255, 255, 0.5);
+    margin-right: 24px;
+}
+
+.num {
+    color: rgba(135, 206, 235, 0.8);
+}
+
+.suf {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.r5-info {
+    padding-top: 10px;
+}
+
+.r5-info-text-box {
+    margin-left: 52px;
+    position: relative;
+    top: -18px;
+} 
+
+.r4-btn {
+    background-color: #607D8B;
+    color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    top: -18px;
+    left: 52px;
+}
+
+.s-box {
+    margin-bottom: 5px;
+}
+
+.tips {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.tips-start {
+    position: relative;
+    top: 2px;
+}

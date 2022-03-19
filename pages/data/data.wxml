@@ -1,0 +1,117 @@
+<!--pages/data/data.wxml-->
+<view id="main">
+    <!-- 角色池子 -->
+    <view class="item">
+        <view class="canvas">
+            <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ canvas_1 }}"></ec-canvas>
+        </view>
+        <view class="info-box">
+            <view class="sum s-box">
+                <text class="title">总计</text>
+                <text class="num">{{jsc.sum}}</text>
+                <text class="suf"> 抽</text>
+            </view>
+            <view class="avg s-box">
+                <text class="title">平均</text>
+                <text class="num">{{jsc.avg}}</text>
+                <text class="suf"> 抽出五星</text>
+            </view>
+            <view class="counter s-box">
+                <text class="title">累计</text>
+                <text class="num">{{jsc.counter}}</text>
+                <text class="suf"> 未出五星</text>
+            </view>
+            <view class="r5-info s-box">
+                <text class="title">五星</text>
+                <view class="r5-info-text-box">
+                    <text wx:for="{{jsc.r5_info}}" style="color: {{item.color}};">{{item.name}}[{{item.id}}] </text>
+                </view>
+            </view>
+            <view class="r4-info">
+                <text class="title">四星</text>
+                <button class="r4-btn" style="width: 180px; margin: 0px;">查看明细(停用)</button>
+            </view>
+            <view class="tips">
+                <text class="tips-start">* </text>
+                <text class="tips-text"> 由于米哈游官方仅提供近六个月数据，所以最后一次五星抽卡计数是不可信的。</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 常驻池 -->
+    <view class="item">
+        <view class="canvas">
+            <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ canvas_2 }}"></ec-canvas>
+        </view>
+        <view class="info-box">
+            <view class="sum s-box">
+                <text class="title">总计</text>
+                <text class="num">{{czc.sum}}</text>
+                <text class="suf"> 抽</text>
+            </view>
+            <view class="avg s-box">
+                <text class="title">平均</text>
+                <text class="num">{{czc.avg}}</text>
+                <text class="suf"> 抽出五星</text>
+            </view>
+            <view class="counter s-box">
+                <text class="title">累计</text>
+                <text class="num">{{czc.counter}}</text>
+                <text class="suf"> 未出五星</text>
+            </view>
+            <view class="r5-info s-box">
+                <text class="title">五星</text>
+                <view class="r5-info-text-box">
+                    <text wx:for="{{czc.r5_info}}" style="color: {{item.color}};">{{item.name}}[{{item.id}}] </text>
+                </view>
+            </view>
+            <view class="r4-info">
+                <text class="title">四星</text>
+                <button class="r4-btn" style="width: 180px; margin: 0px;">查看明细(停用)</button>
+            </view>
+            <view class="tips">
+                <text class="tips-start">* </text>
+                <text class="tips-text"> 由于米哈游官方仅提供近六个月数据，所以最后一次五星抽卡计数是不可信的。</text>
+            </view>
+        </view>
+    </view>
+
+
+    <!-- 武器池 -->
+    <view class="item">
+        <view class="canvas">
+            <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ canvas_3 }}"></ec-canvas>
+        </view>
+        <view class="info-box">
+            <view class="sum s-box">
+                <text class="title">总计</text>
+                <text class="num">{{wqc.sum}}</text>
+                <text class="suf"> 抽</text>
+            </view>
+            <view class="avg s-box">
+                <text class="title">平均</text>
+                <text class="num">{{wqc.avg}}</text>
+                <text class="suf"> 抽出五星</text>
+            </view>
+            <view class="counter s-box">
+                <text class="title">累计</text>
+                <text class="num">{{wqc.counter}}</text>
+                <text class="suf"> 未出五星</text>
+            </view>
+            <view class="r5-info s-box">
+                <text class="title">五星</text>
+                <view class="r5-info-text-box">
+                    <text wx:for="{{wqc.r5_info}}" style="color: {{item.color}};">{{item.name}}[{{item.id}}] </text>
+                </view>
+            </view>
+            <view class="r4-info">
+                <text class="title">四星</text>
+                <button class="r4-btn" style="width: 180px; margin: 0px;">查看明细(停用)</button>
+            </view>
+            <view class="tips">
+                <text class="tips-start">* </text>
+                <text class="tips-text"> 由于米哈游官方仅提供近六个月数据，所以最后一次五星抽卡计数是不可信的。</text>
+            </view>
+        </view>
+    </view>
+</view>

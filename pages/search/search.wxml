@@ -1,0 +1,19 @@
+<!--pages/search/search.wxml-->
+<view class="main">
+    <view class="container">
+        <view class="inputbar">
+            <input type="text" id="url" placeholder="请输入抽卡链接" placeholder-class="url-placeholder" bindinput="onEdit" maxlength="2048"/>
+            <view class="tipbar">
+                <text class="tip-text" id="symbol">*</text>
+                <text class="ti-text" id="message">链接的有效时限一般为24小时。</text>
+            </view>
+        </view>
+        <view class="submit-btn">
+            <button id="getdata" size="default" bindtap="onSubmit" hover-class="btn-hover">查 询</button>
+            <button id="gethistory" size="default" bindtap="onHistory" hover-class="hisbtn-hover">查看上次历史记录</button>    
+        </view>
+    </view>
+    <view class="bug" bindtap="submitBug">
+            报个bug
+    </view>
+</view>
