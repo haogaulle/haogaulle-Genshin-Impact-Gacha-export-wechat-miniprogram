@@ -1,5 +1,6 @@
 // pages/search/search.js
 var tools = require("./searchTools.js");
+const message = require("./message.js");
 var Tools = new tools.SearchTools();
 
 // var test = require("./testTools.js");
@@ -136,8 +137,8 @@ Page({
         var all_list = new Array();  // 记录一个池子的全部信息
         while(true) {
 
-            var full_url = this.getFullUrl(ctype, end_id);
-            var res = await Tools.requestGet(full_url);
+            var full_url = this.getFullUrl(ctype, end_id);  // 获得完整请求链接
+            var res = await Tools.requestGet(full_url);  // 请求一次数据--20条
             var next = await this.handleRetcode(res.data.retcode);  // 处理异常code
 
             // 根据异常code来改变循环
@@ -145,65 +146,27 @@ Page({
                 continue;
             }
             if(next === "over time"){  // 链接超时
-                wx.showToast({
-                    title: '链接已过期',
-                    icon: 'error',
-                    success: (msg) => {
-                      setTimeout(
-                          function(){
-                              wx.hideToast({
-                                success: (res) => {},
-                              })
-                          },
-                          3000
-                      );
-                    },
-                  });
-                break;
+                message.overTime();
+                return -1;
             }
-            if(next === "authkey error"){
-                wx.showToast({
-                    title: 'authkey错误',
-                    icon: 'error',
-                    success: (msg) => {
-                      setTimeout(
-                          function(){
-                              wx.hideToast({
-                                success: (res) => {},
-                              })
-                          },
-                          3000
-                      );
-                    },
-                  });
-                break;
+            if(next === "authkey error"){  // authkey错误
+                message.authkeyError();
+                return -1;
             }
-            if(next === "unknow error"){
-                wx.showToast({
-                    title: 'unknow error',
-                    icon: 'error',
-                    success: (msg) => {
-                      setTimeout(
-                          function(){
-                              wx.hideToast({
-                                success: (res) => {},
-                              })
-                          },
-                          3000
-                      );
-                    },
-                  });
-                break;
+            if(next === "unknow error"){  //  未知错误
+                message.unknowError();
+                return -1;
             }
 
-            if (res.data.data === null) {
-                res.data.data = {
-                    list: []
-                }
-            } 
+            // res.data.data = null;
 
-            var info_list = res.data.data.list;  // 每次请求得到的数据列表
-            var length = info_list.length;  // 数据列表的长度
+            try {
+                var info_list = res.data.data.list;  // 每次请求得到的数据列表
+                var length = info_list.length;  // 数据列表的长度
+            } catch(err) {
+                var info_list = new Array();
+                var length = info_list.length;
+            }
 
             all_list = all_list.concat(info_list);
 
@@ -213,7 +176,7 @@ Page({
 
             if(length !== 20){
 
-                if (all_list.length != 0) {
+                if (length !== 0) {
                     this.data.uid = all_list[0].uid
                 }
                 Tools.parseData(all_list, ctype);  // 解析当前池子数据
@@ -234,18 +197,27 @@ Page({
                 end_id = 0;
             }
         };
-        return;
+        return 1;
+    },
+
+    saveTolocal: function() {
+        var app = getApp();
+        wx.setStorageSync('jsc', app.globalData.jsc);
+        wx.setStorageSync('czc', app.globalData.czc);
+        wx.setStorageSync('wqc', app.globalData.wqc);
     },
 
     clearData: function() {
         var app = getApp();
         app.globalData.jsc = {
             sum: 0,
-            start: "无数据",
-            end: "无数据",
+            start: "",
+            end: "",
             r5_info: [],
             r5_info_wq: [],
             r5_info_js: [],
+            r5_js_sum: 0,
+            r5_wq_sum: 0,
             r5_sum: 0,
             r4_js: 0,
             r4_wq: 0,
@@ -260,6 +232,8 @@ Page({
             r5_info_wq: [],
             r5_info_js: [],
             r5_info: [],
+            r5_js_sum: 0,
+            r5_wq_sum: 0,
             r5_sum: 0,
             r4_js: 0,
             r4_wq: 0,
@@ -274,6 +248,8 @@ Page({
             r5_info: [],
             r5_info_wq: [],
             r5_info_js: [],
+            r5_js_sum: 0,
+            r5_wq_sum: 0,
             r5_sum: 0,
             r4_js: 0,
             r4_wq: 0,
@@ -284,28 +260,37 @@ Page({
     },
 
     onSubmit: async function(event) {
-        this.clearData();
-        var app = getApp();
+        const app = getApp();
+
+        this.clearData();  // 防止上次请求对本次产生影响
+
         wx.showLoading({
             title: "正在加载数据",
-            success: () => {}
-            // mask: true
+            success: () => {},
+            mask: true
         })
         var url = this.data.url;
         this.data.authkey = this.getAuthkey(url);
+        app.globalData.authkey = this.data.authkey;
         if(this.data.authkey === "error"){
             return;
         }
-        await this.getData();
-        // console.log(getApp().globalData);
-        wx.setStorageSync('jsc', app.globalData.jsc);
-        wx.setStorageSync('czc', app.globalData.czc);
-        wx.setStorageSync('wqc', app.globalData.wqc);
+
+        // 请求数据
+        if (await this.getData() === -1) {
+            return;
+        }
+
+        // 缓存本次数据到本地
+        this.saveTolocal();
+
+        // 记录日志
         this.updateLog(this.data.authkey, this.data.uid);
         wx.hideLoading({
           success: (res) => {},
         })
 
+        // 跳转
         wx.redirectTo({
           url: '../data/data',
         })

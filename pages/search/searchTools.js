@@ -86,6 +86,7 @@ function SearchTools() {
       dataset.counter++;  // 计数器加一
 
       if (res[i].rank_type === "5") {
+        dataset.r5_sum++;
         var item_color = this.getColor(res[i].name);
         var item = {
           name: res[i].name,
@@ -94,11 +95,13 @@ function SearchTools() {
         }
         dataset.r5_info.push(item);
         if (res[i].item_type === "武器") {
+          dataset.r5_wq_sum++;
           dataset.r5_info_wq.push(item);
           dataset.counter = 0;
           continue;
         }
         dataset.r5_info_js.push(item);
+        dataset.r5_js_sum++;
         dataset.counter = 0;
       }
 
@@ -117,7 +120,7 @@ function SearchTools() {
     dataset.r5_info.reverse();
 
     // 计算平均数据
-    dataset.avg = parseInt((dataset.sum - dataset.counter) / (dataset.r5_info_js.length + dataset.r5_info_wq.length));
+    dataset.avg = parseInt((dataset.sum - dataset.counter) / (dataset.r5_info.length));
 
     // 记录时间
     if (dataset.sum !== 0) {
